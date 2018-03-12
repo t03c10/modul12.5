@@ -1,0 +1,46 @@
+{
+  "name": "modul8.5",
+  "version": "1.0.0",
+  "description": "https://t03c10.github.io/modul8.5/",
+  "main": "index.js",
+  "scripts": {
+    "initp": "npm install --save-dev browser-sync && npm install --save-dev autoprefixer-cli && npm install --save-dev globstar && npm install --save-dev node-sass && npm install --save-dev npm-run-all && npm install --save-dev nu-html-checker && npm install --save-dev onchange && npm install --save-dev jshint",
+    "test": "npm run test:html",
+    "test:html": "globstar nu-html-checker *.html",
+    "test:js": "globstar jshint js/*.js",
+    "check": "npm run sync:browsersync",
+    "check:browsersync": "node_modules/.bin/browser-sync start --server --files 'css/*.css' '*.html'",
+    "build": "npm run build:sass && npm run build:autoprefixer && npm run test",
+    "build:clean": "rm -rf css/*.*",
+    "build:sass": "node-sass --output-style compact -o css sass",
+    "build:autoprefixer": "autoprefixer-cli css/style.css",
+    "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
+    "watch": "npm-run-all build -p watch:sassprefixer",
+    "watch:sassprefixer": "onchange -d 100 scss/style.scss -- npm-run-all check:*",
+    "check:sass": "node-sass --output-style expanded --source-map true -o css sass",
+    "check:autoprefixer": "autoprefixer-cli  css/style.css",
+    "sync": "node_modules/.bin/browser-sync start --server --files 'css/*.css' '*.html'",
+    "sync:browsersync" : "node_modules/.bin/browser-sync start --server --files 'css/*.css' '*.html''js/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t03c10/modul8.5"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/t03c10/modul8.5/issues"
+  },
+  "homepage": "https://github.com/t03c10/modul8.5#readme",
+  "devDependencies": {
+    "autoprefixer-cli": "^1.0.0",
+    "browser-sync": "^2.23.6",
+    "globstar": "^1.0.0",
+    "jshint": "^2.9.5",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
+    "nu-html-checker": "^0.1.0",
+    "onchange": "^3.3.0"
+  }
+}
